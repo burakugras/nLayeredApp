@@ -1,4 +1,5 @@
 ﻿using Core.DataAccess.Repositories;
+using DataAccess.Contexts;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    public interface IProductDal:IRepository<Product,int>,IAsyncRepository<Product,int>
+    public interface ICategoryDal:IRepository<Category,int>,IAsyncRepository<Category,int>
     {
     }
 }

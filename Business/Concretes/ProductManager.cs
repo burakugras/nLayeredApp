@@ -5,11 +5,13 @@ using Business.Dtos.Responses;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Business.Concretes
 {
@@ -28,21 +30,21 @@ namespace Business.Concretes
         {
             Product product = _mapper.Map<Product>(createProductRequest);
             Product createdProduct = await _productDal.AddAsync(product);
-
             CreatedProductResponse createdProductResponse = _mapper.Map<CreatedProductResponse>(createdProduct);
-
-            return createdProductResponse;      
+            return createdProductResponse;
 
         }
 
-        public async Task<IPaginate<GetListProductResponse>> GetListAsync()
+        public async Task<IPaginate<GetListProductResponse>> GetListAsync(PageRequest pageRequest)
         {
-            var productList = await _productDal.GetListAsync();
-            var mappedList=_mapper.Map<Paginate<GetListProductResponse>>(productList);
 
-            return mappedList;
+            var data = await _productDal.GetListAsync(include: p => p.Include(p => p.Category),
+                index:pageRequest.PageIndex,
+                size:pageRequest.PageSize);
+            var result = _mapper.Map<Paginate<GetListProductResponse>>(data);
+            return result;
 
-            
         }
     }
 }
+

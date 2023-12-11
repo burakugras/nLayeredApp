@@ -13,4 +13,5 @@ namespace Business.Dtos.Requests
         public short UnitsInStock { get; set; }
         public string QuantityPerUnit { get; set; }
     }
+
 }
