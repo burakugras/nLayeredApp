@@ -27,12 +27,19 @@ namespace Business.Profiles
             */
 
 
-            CreateMap<CreateProductRequest, Product>();
-            CreateMap<Product, CreatedProductResponse>();
-            //GetListResponse İçin
+            //CreateMap<CreateProductRequest, Product>();
+            //CreateMap<Product, CreatedProductResponse>();
+            ////GetListResponse İçin
 
-            CreateMap<Product, GetListProductResponse>().ForMember(destinationMember: p => p.CategoryName, memberOptions: opt => opt.MapFrom(p => p.Category.Name)).ReverseMap();
-            CreateMap<Paginate<Product>, Paginate<GetListProductResponse>>();
+            //CreateMap<Product, GetListProductResponse>().ForMember(destinationMember: p => p.CategoryName, memberOptions: opt => opt.MapFrom(p => p.Category.Name)).ReverseMap();
+            //CreateMap<Paginate<Product>, Paginate<GetListProductResponse>>();
+
+            CreateMap<Product,GetListProductResponse>().ForMember(destinationMember:p=>p.CategoryName,
+                memberOptions:opt=>opt.MapFrom(p=>p.Category.Name)).ReverseMap();
+
+            CreateMap<IPaginate<Product>, Paginate<GetListProductResponse>>();
+            CreateMap<Product,CreateProductRequest>().ReverseMap();
+            CreateMap<Product,CreatedProductResponse>().ReverseMap();
         }
     }
 }

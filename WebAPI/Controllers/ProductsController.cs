@@ -28,7 +28,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
         {
-            var result = await _productService.GetListAsync(pageRequest);
+            var result = await _productService.GetAll(pageRequest);
             return Ok(result);
         }
     }
