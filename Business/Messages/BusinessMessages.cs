@@ -10,5 +10,8 @@ namespace Business.Messages
     {
         public static string CategoryLimit = "Kategori sayısı max 10 olabilir.";
         public static string CategoryProductLimit = "Bir kategoride ürün sayısı max 20 olabilir.";
+
+        public static string ContactNameLimit = "Aynı ContactName'den 1'den fazla olamaz.";
+        public static string CityLimit = "Bir şehirden maksimum 10 müşteri olabilir";
     }
 }

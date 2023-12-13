@@ -9,7 +9,8 @@ namespace Business.Profiles
     {
         public CategoryMappingProfile()
         {
-            CreateMap<Category, CreateCategoryRequest>().ReverseMap(); CreateMap<Category, CreatedCategoryResponse>().ReverseMap();
+            CreateMap<Category, CreateCategoryRequest>().ReverseMap();
+            CreateMap<Category, CreatedCategoryResponse>().ReverseMap();
         }
     }
 }

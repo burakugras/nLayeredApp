@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Requests;
 using Business.Dtos.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -17,15 +18,19 @@ namespace Business.Concretes
     {
         ICustomerDal _customerDal;
         IMapper _mapper;
+        CustomerBusinessRules _customerRules;
 
-        public CustomerManager(ICustomerDal customerDal, IMapper mapper)
+        public CustomerManager(ICustomerDal customerDal, IMapper mapper, CustomerBusinessRules customerRules)
         {
             _customerDal = customerDal;
             _mapper = mapper;
+            _customerRules = customerRules;
         }
 
         public async Task<CreatedCustomerResponse> Add(CreateCustomerRequest createCustomerRequest)
         {
+            await _customerRules.ContactNameRepeat(createCustomerRequest.ContactName);
+            await _customerRules.MaxCityCount(createCustomerRequest.City);
             Customer customer = _mapper.Map<Customer>(createCustomerRequest);
             Customer createdCustomer = await _customerDal.AddAsync(customer);
 
