@@ -31,6 +31,7 @@ namespace Business.Concretes
         {
             await _customerRules.ContactNameRepeat(createCustomerRequest.ContactName);
             await _customerRules.MaxCityCount(createCustomerRequest.City);
+
             Customer customer = _mapper.Map<Customer>(createCustomerRequest);
             Customer createdCustomer = await _customerDal.AddAsync(customer);
 

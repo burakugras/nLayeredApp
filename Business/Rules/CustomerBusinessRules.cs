@@ -23,7 +23,7 @@ namespace Business.Rules
         {
             var result=await _customerDal.GetAsync(c=>c.ContactName==contactName);
 
-            if (result == null)
+            if (result != null)
             {
                 throw new BusinessException(BusinessMessages.ContactNameLimit);
             }
