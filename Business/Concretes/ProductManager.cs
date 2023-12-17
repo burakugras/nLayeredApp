@@ -41,6 +41,14 @@ namespace Business.Concretes
 
         }
 
+        public async Task<Product> Delete(int id)
+        {
+            var data=await _productDal.GetAsync(p=>p.Id==id);
+            data.DeletedDate= DateTime.Now;
+            var result=await _productDal.DeleteAsync(data);
+            return result;
+        }
+
         public async Task<IPaginate<GetListProductResponse>> GetAll(PageRequest pageRequest)
         {
 
@@ -50,6 +58,26 @@ namespace Business.Concretes
             var result = _mapper.Map<Paginate<GetListProductResponse>>(data);
             return result;
 
+        }
+
+        public async Task<UpdatedProductResponse> Update(UpdateProductRequest updateProductRequest)
+        {
+            var data = await _productDal.GetAsync(p => p.Id == updateProductRequest.Id);
+            _mapper.Map(updateProductRequest, data);
+            data.UpdatedDate = DateTime.Now;
+
+            await _productDal.UpdateAsync(data);
+
+            var result = _mapper.Map<UpdatedProductResponse>(data);
+            return result;
+
+        }
+
+        public async Task<CreatedProductResponse> GetById(int id)
+        {
+            var data = await _productDal.GetAsync(p => p.Id == id);
+            var result=_mapper.Map<CreatedProductResponse>(data);
+            return result;
         }
     }
 }

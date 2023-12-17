@@ -13,8 +13,9 @@ namespace Business.Abstracts
     public interface IProductService
     {
         Task<IPaginate<GetListProductResponse>> GetAll(PageRequest pageRequest);
-        Task<CreatedProductResponse> Add(CreateProductRequest createProductRequest); 
+        Task<CreatedProductResponse> Add(CreateProductRequest createProductRequest);
+        Task<UpdatedProductResponse> Update(UpdateProductRequest updateProductRequest);
+        Task<Product> Delete(int id);
+        Task<CreatedProductResponse> GetById(int id);
     }
 }
-//GetListProductResponse
-//automapper entegrasyon

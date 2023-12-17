@@ -15,31 +15,18 @@ namespace Business.Profiles
     {
         public ProductMappingProfile()
         {
-            /*
-            CreateMap<Product, GetListProductResponse>().ForMember(destinationMember: p => p.CategoryName, memberOptions: opt => opt.MapFrom(p => p.Category.Name)).ReverseMap();
+            CreateMap<Product, GetListProductResponse>()
+                .ForMember(
+                destinationMember: p => p.CategoryName,
+                memberOptions: opt => opt.MapFrom(p => p.Category.CategoryName))
+                .ReverseMap();
 
-            CreateMap<CreateProductRequest, Product>();
-            //CreateMap<Product, CreatedProductResponse>();
+            CreateMap<Paginate<Product>, Paginate<GetListProductResponse>>();
+            CreateMap<Product, CreateProductRequest>().ReverseMap();
+            CreateMap<Product, CreatedProductResponse>().ReverseMap();
 
-            CreateMap<Product, GetListProductResponse>().ReverseMap();
-            CreateMap<Paginate<Product>, Paginate<GetListProductResponse>>().ReverseMap();
-
-            */
-
-
-            //CreateMap<CreateProductRequest, Product>();
-            //CreateMap<Product, CreatedProductResponse>();
-            ////GetListResponse İçin
-
-            //CreateMap<Product, GetListProductResponse>().ForMember(destinationMember: p => p.CategoryName, memberOptions: opt => opt.MapFrom(p => p.Category.Name)).ReverseMap();
-            //CreateMap<Paginate<Product>, Paginate<GetListProductResponse>>();
-
-            CreateMap<Product,GetListProductResponse>().ForMember(destinationMember:p=>p.CategoryName,
-                memberOptions:opt=>opt.MapFrom(p=>p.Category.Name)).ReverseMap();
-
-            CreateMap<IPaginate<Product>, Paginate<GetListProductResponse>>();
-            CreateMap<Product,CreateProductRequest>().ReverseMap();
-            CreateMap<Product,CreatedProductResponse>().ReverseMap();
+            CreateMap<UpdateProductRequest, Product>().ForMember(dest => dest.CreatedDate, opt => opt.Ignore());
+            CreateMap<Product, UpdatedProductResponse>();
         }
     }
 }

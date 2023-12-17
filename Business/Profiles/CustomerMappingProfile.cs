@@ -16,13 +16,14 @@ namespace Business.Profiles
         public CustomerMappingProfile()
         {
             CreateMap<CreateCustomerRequest, Customer>();
-            CreateMap<Customer, CreateCategoryRequest>();
+            CreateMap<Customer, CreatedCustomerResponse>();
 
-            CreateMap<Customer,GetListCustomerResponse>().ReverseMap();
-            CreateMap<Paginate<Customer>, Paginate<GetListCustomerResponse>>();
+            CreateMap<Customer, GetListCustomerResponse>().ReverseMap();
+            CreateMap<Paginate<Customer>, Paginate<GetListCustomerResponse>>().ReverseMap();
+
 
             CreateMap<UpdateCustomerRequest, Customer>().ForMember(dest => dest.CreatedDate, opt => opt.Ignore());
-            CreateMap<Customer, CreatedCustomerResponse>();
+            CreateMap<Customer, UpdatedCustomerResponse>().ReverseMap();
         }
     }
 }

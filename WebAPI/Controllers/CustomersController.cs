@@ -1,6 +1,7 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.Requests;
 using Core.DataAccess.Paging;
+using Entities.Concretes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,9 +40,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("delete")]
-        public async Task<IActionResult> Delete(string id,bool permanent)
+        public async Task<IActionResult> Delete(string id)
         {
-            var result=await _customerService.Delete(id, permanent);
+            var result=await _customerService.Delete(id);
             return Ok(result);
         }
     }

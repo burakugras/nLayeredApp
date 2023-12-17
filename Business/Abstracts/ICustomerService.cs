@@ -14,7 +14,7 @@ namespace Business.Abstracts
     {
         Task<IPaginate<GetListCustomerResponse>> GetAll(PageRequest pageRequest);
         Task<CreatedCustomerResponse> Add(CreateCustomerRequest createCustomerRequest);
-        Task<CreatedCustomerResponse> Update(UpdateCustomerRequest updateCustomerRequest);
-        Task<Customer> Delete(string id, bool permanent);        
+        Task<UpdatedCustomerResponse> Update(UpdateCustomerRequest updateCustomerRequest);
+        Task<Customer> Delete(string id);        
     }
 }

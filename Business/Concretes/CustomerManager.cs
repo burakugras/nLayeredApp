@@ -39,9 +39,10 @@ namespace Business.Concretes
             return createdCustomerResponse;
         }
 
-        public async Task<Customer> Delete(string id, bool permanent)
+        public async Task<Customer> Delete(string id)
         {
-            var data = await _customerDal.GetAsync(c => c.Id == id);
+            var data = await _customerDal.GetAsync(c => c.Id ==id);
+            data.DeletedDate = DateTime.Now;
             var result = await _customerDal.DeleteAsync(data);
             return result;
         }
@@ -57,7 +58,7 @@ namespace Business.Concretes
             return result;
         }
 
-        public async Task<CreatedCustomerResponse> Update(UpdateCustomerRequest updateCustomerRequest)
+        public async Task<UpdatedCustomerResponse> Update(UpdateCustomerRequest updateCustomerRequest)
         {
             var data=await _customerDal.GetAsync(c=>c.Id == updateCustomerRequest.Id);
 
@@ -66,7 +67,7 @@ namespace Business.Concretes
 
             await _customerDal.UpdateAsync(data);
 
-            var result=_mapper.Map<CreatedCustomerResponse>(data);
+            var result=_mapper.Map<UpdatedCustomerResponse>(data);
             return result;
         }
     }
