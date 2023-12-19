@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Business.Dtos.Requests;
 using Business.Dtos.Responses;
+using Core.DataAccess.Paging;
 using Entities.Concretes;
 
 namespace Business.Profiles
@@ -9,8 +10,16 @@ namespace Business.Profiles
     {
         public CategoryMappingProfile()
         {
-            CreateMap<Category, CreateCategoryRequest>().ReverseMap();
-            CreateMap<Category, CreatedCategoryResponse>().ReverseMap();
+            CreateMap<CreateCategoryRequest, Category>();
+            CreateMap<Category, CreatedCategoryResponse>();
+
+            CreateMap<Category,GetListCategoryResponse>().ReverseMap();
+            CreateMap<Paginate<Category>, Paginate<GetListCategoryResponse>>().ReverseMap();
+
+            CreateMap<UpdateCategoryRequest, Category>().ForMember(dest => dest.CreatedDate, opt => opt.Ignore()); 
+            CreateMap<Category, UpdatedCategoryResponse>().ReverseMap();
+
+
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Business.Rules
         {
             var result = await _categoryDal.GetListAsync();
 
-            if (result.Count >= 10)
+            if (result.Count >= 100)
             {
                 throw new BusinessException(BusinessMessages.CategoryLimit);
             }
