@@ -79,6 +79,13 @@ namespace Business.Concretes
             var result=_mapper.Map<CreatedProductResponse>(data);
             return result;
         }
+
+        public async Task<CreatedProductResponse> GetByProductName(string name)
+        {
+            var data=await _productDal.GetAsync(p=>p.ProductName == name);
+            var result = _mapper.Map<CreatedProductResponse>(data);
+            return result;
+        }
     }
 }
 

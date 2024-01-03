@@ -2,6 +2,7 @@
 using Business.Dtos.Requests;
 using Core.DataAccess.Paging;
 using Entities.Concretes;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

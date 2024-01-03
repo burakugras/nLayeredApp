@@ -3,6 +3,7 @@ using Business.Dtos.Requests;
 using Business.Dtos.Responses;
 using Core.DataAccess.Paging;
 using Entities.Concretes;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,6 +52,13 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _productService.GetById(id);
+            return Ok(result);
+        }
+
+        [HttpGet("getByProductName")]
+        public async Task<IActionResult> GetByProductName(string name)
+        {
+            var result = await _productService.GetByProductName(name);
             return Ok(result);
         }
     }
