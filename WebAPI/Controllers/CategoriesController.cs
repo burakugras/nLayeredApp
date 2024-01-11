@@ -40,10 +40,17 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
+        [HttpGet("getById")]
+        public async Task<IActionResult> GetById([FromQuery] int id)
+        {
+            var result = await _categoryService.GetById(id);
+            return Ok(result);
+        }
+
         [HttpPost("update")]
         public async Task<IActionResult> Update([FromBody] UpdateCategoryRequest updateCategoryRequest)
         {
-            var result=await _categoryService.Update(updateCategoryRequest);
+            var result = await _categoryService.Update(updateCategoryRequest);
             return Ok(result);
         }
     }

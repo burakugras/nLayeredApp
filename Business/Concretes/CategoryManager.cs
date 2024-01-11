@@ -58,6 +58,13 @@ namespace Business.Concretes
             return result;
         }
 
+        public async Task<CreatedCategoryResponse> GetById(int id)
+        {
+            var data = await _categoryDal.GetAsync(c => c.Id == id);
+            var result=_mapper.Map<CreatedCategoryResponse>(data);
+            return result;
+        }
+
         public async Task<UpdatedCategoryResponse> Update(UpdateCategoryRequest updateCategoryRequest)
         {
             var data = await _categoryDal.GetAsync(c => c.Id == updateCategoryRequest.Id);
